@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(CityList.size() == 0){
             CityList.add("汉川");
+            CityList.add("上海");
+            CityList.add("北京");
         }
 
         // 初始化ViewPager
@@ -60,10 +62,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // 创建“点指示器”
         initPoint();
+        // 程序默认开始时，第一个显示List中第一个城市的信息
+        mainVp.setCurrentItem(0);
     }
 
     private void initPoint() {
+        // 为每一个城市都设置一个“点指示器”，初始化为“未选中”
+        for  (int i=0; i < fragmentList.size() ; i++ ){
+            ImageView pIv = new ImageView(this);
+            pIv.setImageResource(R.mipmap.a1);
+            pIv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) pIv.getLayoutParams();
+            lp.setMargins(0,0,20,0);
+            imgList.add(pIv);
+            pointLayout.addView(pIv);
+        }
+        // 将第一个城市的“点指示器”设置为“选中”
+        imgList.get(0).setImageResource(R.mipmap.a2);
 
+        // 设置ViewPager监听器
+        setPagerListener();
+    }
+
+    private void setPagerListener() {
+        /*设置监听事件*/
+        mainVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                // 遍历所有“点指示器”，只将被选中的Fragment对应的指示器设置为“选中”
+                for(int i=0; i<fragmentList.size() ; i++){
+                    if( i == position)
+                        imgList.get(i).setImageResource(R.mipmap.a2);
+                    else
+                        imgList.get(i).setImageResource(R.mipmap.a1);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initPager() {
