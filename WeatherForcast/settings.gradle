@@ -1,0 +1,2 @@
+rootProject.name='WeatherProcast'
+include ':app'
