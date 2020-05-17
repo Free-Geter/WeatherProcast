@@ -1,17 +1,18 @@
 package com.example.weatherprocast;
 
+import com.example.weatherprocast.CityManager.CityManagerActivity;
+import com.example.weatherprocast.DataBase.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +47,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         moreIv.setOnClickListener(this);
 
         fragmentList = new ArrayList<>();
-        CityList = new ArrayList<>();
+
+        // 从数据库获取所有城市名称的列表
+        CityList = dbManager.queryAllCityName();
+
         imgList = new ArrayList<>();
 
+        // 如果数据库中一个城市都没有，添加一个default城市
         if(CityList.size() == 0){
             CityList.add("汉川");
-            CityList.add("上海");
-            CityList.add("北京");
+        }
+
+        // 如果从搜索界面跳转到此界面，会传来一个搜索的城市名称，在此处获取
+        Intent intent =getIntent();
+        String city = intent.getStringExtra("city");
+        // 注意，此时如果程序刚开始启动，会传来一个空的city，导致程序崩溃
+        if( !CityList.contains(city) && !TextUtils.isEmpty(city)){
+            CityList.add(city);
         }
 
         // 初始化ViewPager
@@ -124,11 +135,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()){
             case R.id.main_iv_add:
+                intent.setClass(this, CityManagerActivity.class);
                 break;
             case R.id.main_iv_more:
                 break;
         }
+        startActivity(intent);
     }
 }

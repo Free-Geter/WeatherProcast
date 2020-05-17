@@ -1,10 +1,13 @@
 package com.example.weatherprocast;
 
+import com.example.weatherprocast.Base.BaseFragment;
+import com.example.weatherprocast.DataBase.*;
 import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.weatherprocast.bean.WeatherBean;
 import com.google.gson.Gson;
@@ -34,6 +36,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
 
     String urlp1 = "http://api.map.baidu.com/telematics/v3/weather?location=";
     String urlp2 = "&output=json&ak=FkPhtMBK0HTIQNh7gG4cNUttSTyr0nzo";
+    String city;
     private List<WeatherBean.ResultsBean.IndexBean> indexList;
 
 
@@ -51,7 +54,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
 
         //从Activity获取城市信息，完善url
         Bundle bundle = getArguments();
-        String city = bundle.getString("city");
+        city = bundle.getString("city");
         String url = urlp1 + city + urlp2 ;
         Log.d("message", url);
 
@@ -64,8 +67,15 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onSuccess(String result) {
         // 解析并展示获取的数据
-        Log.d("message",  result);
         parseShowData(result);
+
+        // 对当前显示的所有城市进行检测，如果该城市在数据库中没有缓存，则在数据库中备份数据
+        String i = dbManager.queryInfoByCity(city);
+            if (i == null){
+            Log.d(" city message", "onSuccess: add to database");
+            //更新数据库失败，说明数据库中不含该城市的相关信息
+            dbManager.addCityInfo(city,result);
+        }
     }
 
     private void parseShowData(String result) {
@@ -121,6 +131,12 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onError(Throwable ex, boolean isOnCallback) {
         Log.d("message", "onError: 1");
+
+        // 网络数据获取失败，使用数据库中的天气数据缓存
+        String s = dbManager.queryInfoByCity(city);
+        if (!TextUtils.isEmpty(s)){
+            parseShowData(s);
+        }
     }
 
     @Override
