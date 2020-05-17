@@ -7,12 +7,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.weatherprocast.MainActivity;
+import com.example.weatherprocast.MoreActivity;
 import com.example.weatherprocast.R;
 
 import java.util.ArrayList;
@@ -59,7 +62,9 @@ public class DeleteCityActivity extends AppCompatActivity implements View.OnClic
                     dbManager.deleteInfo(city);
                 }
                 // 完成删除，回到上级Activity
-                finish();
+                Intent intent = new Intent(DeleteCityActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
             case R.id.delete_tv_error:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -76,6 +81,5 @@ public class DeleteCityActivity extends AppCompatActivity implements View.OnClic
                 break;
         }
     }
-
 
 }

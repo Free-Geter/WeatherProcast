@@ -87,4 +87,11 @@ public  class dbManager {
     public static int deleteInfo(String city){
         return database.delete(dbContract.ContactEntry.TABLE_NAME, dbContract.ContactEntry.NAME + "=?",new String[] {city});
     }
+
+    // 删除表中所有信息
+    public static void deleteAllInfo(){
+        // 调用数据库操作语句，清空表中的所有数据，但是表任然存在
+        String sql = "delete from " + dbContract.ContactEntry.TABLE_NAME;
+        database.execSQL(sql);
+    }
 }

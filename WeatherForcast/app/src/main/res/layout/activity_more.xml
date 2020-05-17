@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/more_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#F5F5F5">
+        <ImageView
+            android:id="@+id/more_iv_back"
+            android:src="@mipmap/icon_back"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/more_tv_title"
+            android:text="更多设置"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <View
+        android:id="@+id/more_line1"
+        android:background="#dcdcdc"
+        android:layout_below="@id/more_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/more_tv_exchange_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="更换壁纸"
+        android:textSize="18sp"
+        android:drawableLeft="@mipmap/more_bg"
+        android:drawablePadding="10dp"
+        android:layout_below="@id/more_line1"
+        android:padding="15dp"/>
+    <View
+        android:id="@+id/more_line2"
+        android:background="#dcdcdc"
+        android:layout_below="@id/more_tv_exchange_bg"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <RadioGroup
+        android:id="@+id/more_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/more_line2"
+        android:visibility="gone"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/more_rb_1"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_weight="1"
+            android:background="@mipmap/bg3"
+            android:button="@null"
+            android:gravity="center" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_weight="0.05" />
+
+        <RadioButton
+            android:id="@+id/more_rb_2"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_weight="1"
+            android:background="@mipmap/bg4"
+            android:button="@null"
+            android:gravity="center" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_weight="0.05" />
+        <RadioButton
+            android:id="@+id/more_rb_3"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_weight="1"
+            android:background="@mipmap/bg5"
+            android:button="@null"
+            android:gravity="center"/>
+    </RadioGroup>
+
+    <View
+        android:id="@+id/more_line3"
+        android:layout_below="@id/more_rg"
+        android:background="#dcdcdc"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/more_tv_current_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前版本"
+        android:textSize="18sp"
+        android:drawableLeft="@mipmap/more_version"
+        android:drawablePadding="10dp"
+        android:layout_below="@id/more_rg"
+        android:padding="15dp"/>
+
+    <View
+        android:id="@+id/more_line4"
+        android:layout_below="@id/more_tv_current_version"
+        android:background="#dcdcdc"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/more_tv_clear_cache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="清除缓存"
+        android:textSize="18sp"
+        android:drawableLeft="@mipmap/more_cache"
+        android:drawablePadding="10dp"
+        android:layout_below="@id/more_line4"
+        android:padding="15dp"/>
+
+    <View
+        android:id="@+id/more_line5"
+        android:layout_below="@id/more_tv_clear_cache"
+        android:background="#dcdcdc"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/more_tv_share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="分享软件"
+        android:textSize="18sp"
+        android:drawableLeft="@mipmap/more_share"
+        android:drawablePadding="10dp"
+        android:layout_below="@id/more_line5"
+        android:padding="15dp"/>
+
+</RelativeLayout>

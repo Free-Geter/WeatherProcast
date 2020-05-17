@@ -3,6 +3,8 @@ package com.example.weatherprocast;
 import com.example.weatherprocast.Base.BaseFragment;
 import com.example.weatherprocast.DataBase.*;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -34,6 +36,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     ImageView dayIv;
     LinearLayout futureLayout;
 
+
     String urlp1 = "http://api.map.baidu.com/telematics/v3/weather?location=";
     String urlp2 = "&output=json&ak=FkPhtMBK0HTIQNh7gG4cNUttSTyr0nzo";
     String city;
@@ -43,6 +46,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     public CityWeatherFragment() {
         // Required empty public constructor
     }
+
 
 
     @Override
